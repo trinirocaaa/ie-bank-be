@@ -48,7 +48,7 @@ def update_account(id):
     account = Account.query.get(id)
     account.name = request.json['name']
     account.currency = request.json['currency']
-    account.country = request.json.get('country')
+    account.country = request.json['country']
     db.session.commit()
     return format_account(account)
 
