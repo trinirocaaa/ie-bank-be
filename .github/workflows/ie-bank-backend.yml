@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 env:
-  BACKEND_WEBAPP_DEV: troca-be-dev
+  BACKEND_WEBAPP_DEV_ID: /subscriptions/e0b9cada-61bc-4b5a-bd7a-52c606726b3b/resourceGroups/bcsai2024-devops-students-b-dev/providers/Microsoft.Web/sites/troca-be-dev
   # BACKEND_WEBAPP_UAT: troca-be-uat
 
 jobs:
