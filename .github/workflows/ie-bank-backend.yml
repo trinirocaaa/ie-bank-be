@@ -1,14 +1,15 @@
 name: ie-bank-backend
 
 on:
-  push:
+  workflow_dispatch: #Allows you to manually trigger the workflow from the GitHub Actions tab.
   pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  id-token: write
+      branches:
+        - main
+  push:
+      branches:
+        - '*'
+      paths-ignore:
+        - 'scripts/**'
 
 env:
   BACKEND_WEBAPP_DEV: troca-be-dev
