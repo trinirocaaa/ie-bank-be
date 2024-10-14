@@ -1,21 +1,18 @@
 name: ie-bank-backend
 
 on:
-  workflow_dispatch: #Allows you to manually trigger the workflow from the GitHub Actions tab.
-  pull_request:
-      branches:
-        - main
   push:
-      branches:
-        - '*'
-      paths-ignore:
-        - 'scripts/**'
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
 
 env:
   BACKEND_WEBAPP_DEV: troca-be-dev
-  RESOURCE_GROUP: bcsai2024-devops-students-b-dev
-  SUBSCRIPTION_ID: e0b9cada-61bc-4b5a-bd7a-52c606726b3b  
-  # BACKEND_WEBAPP_UAT: troca-be-uat
+
 
 jobs:
   build:
@@ -76,7 +73,5 @@ jobs:
       uses: azure/webapps-deploy@v3
       id: deploy-to-webapp
       with:
-        app-name: ${{ env.BACKEND_WEBAPP_DEV }}  # Use app name directly
-        resource-group: ${{ env.RESOURCE_GROUP }}  # Pass resource group
-        subscription-id: ${{ env.SUBSCRIPTION_ID }}  # Pass subscription ID
+        app-name: ${{ env.BACKEND_WEBAPP_DEV }}
         package: .
