@@ -69,6 +69,17 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      # Add a delay to allow Azure cache to update
+    - name: Wait for Azure to propagate resources
+    run: sleep 60  # Wait for 60 seconds (you can adjust this as needed)
+
+    - name: Verify App Service existence
+      run: |
+        az webapp show --name ${{ env.BACKEND_WEBAPP_DEV }} --resource-group BCSAI2024-DEVOPS-STUDENTS-B-DEV
+      env:
+        AZURE_SUBSCRIPTION_ID: e0b9cada-61bc-45ba-bd7a-52c606726b3b
+
+
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
