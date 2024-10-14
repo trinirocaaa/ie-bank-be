@@ -12,6 +12,8 @@ permissions:
 
 env:
   BACKEND_WEBAPP_DEV: troca-be-dev
+  RESOURCE_GROUP: BCSAI2024-DEVOPS-STUDENTS-B-DEV  # Explicitly define the resource group
+  SUBSCRIPTION_ID: e0b9cada-61bc-4b5a-bd7a-52c606726b3b  # Explicitly define the subscription ID
 
 jobs:
   build:
