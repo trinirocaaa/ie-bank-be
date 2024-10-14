@@ -27,7 +27,6 @@ def test_create_account(testing_client):
     THEN check the response is valid
     """
     response = testing_client.post('/accounts', json={'name': 'John Doe', 'currency': '€','country': 'spain'})
-    
     assert response.status_code == 200
 
 
