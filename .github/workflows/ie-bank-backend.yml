@@ -11,7 +11,9 @@ permissions:
   id-token: write
 
 env:
-  BACKEND_WEBAPP_DEV_ID: /subscriptions/e0b9cada-61bc-4b5a-bd7a-52c606726b3b/resourceGroups/bcsai2024-devops-students-b-dev/providers/Microsoft.Web/sites/troca-be-dev
+  BACKEND_WEBAPP_DEV: troca-be-dev
+  RESOURCE_GROUP: bcsai2024-devops-students-b-dev
+  SUBSCRIPTION_ID: e0b9cada-61bc-4b5a-bd7a-52c606726b3b  
   # BACKEND_WEBAPP_UAT: troca-be-uat
 
 jobs:
@@ -73,5 +75,7 @@ jobs:
       uses: azure/webapps-deploy@v3
       id: deploy-to-webapp
       with:
-        app-name: ${{ env.BACKEND_WEBAPP_DEV }}
+        app-name: ${{ env.BACKEND_WEBAPP_DEV }}  # Use app name directly
+        resource-group: ${{ env.RESOURCE_GROUP }}  # Pass resource group
+        subscription-id: ${{ env.SUBSCRIPTION_ID }}  # Pass subscription ID
         package: .
