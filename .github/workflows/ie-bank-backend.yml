@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 env:
-  BACKEND_WEBAPP_DEV: "troca-be-dev"
+  BACKEND_WEBAPP_DEV: "trocaaa-be-dev"
 jobs:
   build:
     runs-on: ubuntu-latest
