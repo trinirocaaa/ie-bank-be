@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, abort
 from iebank_api import db, app
 from iebank_api.models import Account
 
@@ -9,7 +9,7 @@ def hello_world():
 @app.route('/skull', methods=['GET'])
 def skull():
     text = 'Hi! This is the BACKEND SKULL! 💀 '
-    
+
     text = text +'<br/>Database URL:' + db.engine.url.database
     if db.engine.url.host:
         text = text +'<br/>Database host:' + db.engine.url.host
@@ -24,12 +24,20 @@ def skull():
 
 @app.route('/accounts', methods=['POST'])
 def create_account():
-    name = request.json['name']
-    currency = request.json['currency']
-    account = Account(name, currency)
+    data = request.get_json()
+    required_fields = ['name', 'currency', 'country']
+    if not data or not all(field in data for field in required_fields):
+        abort(500)  # Abort with 500 Internal Server Error if any field is missing
+
+    name = data['name']
+    currency = data['currency']
+    country = data['country']
+
+    account = Account(name, currency, country)
     db.session.add(account)
     db.session.commit()
     return format_account(account)
+
 
 @app.route('/accounts', methods=['GET'])
 def get_accounts():
@@ -39,11 +47,15 @@ def get_accounts():
 @app.route('/accounts/<int:id>', methods=['GET'])
 def get_account(id):
     account = Account.query.get(id)
+    if not account:
+        abort(500)
     return format_account(account)
 
 @app.route('/accounts/<int:id>', methods=['PUT'])
 def update_account(id):
     account = Account.query.get(id)
+    if not account:
+        abort(500)
     account.name = request.json['name']
     db.session.commit()
     return format_account(account)
@@ -51,6 +63,8 @@ def update_account(id):
 @app.route('/accounts/<int:id>', methods=['DELETE'])
 def delete_account(id):
     account = Account.query.get(id)
+    if not account:
+        abort(500)
     db.session.delete(account)
     db.session.commit()
     return format_account(account)
@@ -63,5 +77,6 @@ def format_account(account):
         'balance': account.balance,
         'currency': account.currency,
         'status': account.status,
-        'created_at': account.created_at
+        'created_at': account.created_at,
+        'country': account.country
     }
