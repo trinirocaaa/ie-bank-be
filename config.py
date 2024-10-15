@@ -13,6 +13,7 @@ class LocalConfig(Config):
     dbuser=os.getenv('DBUSER'),
     dbpass=os.getenv('DBPASS'),
     dbhost=os.getenv('DBHOST'),
+    dbport=os.getenv('DBPORT'),
     dbname=os.getenv('DBNAME')
         )
     DEBUG = True

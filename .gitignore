@@ -1,6 +1,7 @@
-.venv/
+venv/
 __pycache__/
 .env
 .vscode
 .db/
 instance/
+.DS_Store
