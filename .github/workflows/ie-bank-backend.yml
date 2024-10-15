@@ -78,7 +78,7 @@ jobs:
 
   deploy-uat:
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [build, deploy-dev]
     environment:
       name: 'UAT'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
