@@ -11,8 +11,10 @@ permissions:
   id-token: write
 
 env:
+
   BACKEND_WEBAPP_DEV: troca-be-dev
   BACKEND_WEBAPP_UAT: troca-be-uat
+
 
 jobs:
   build:
